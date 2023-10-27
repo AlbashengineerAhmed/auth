@@ -13,13 +13,13 @@ export const signup = async (req, res, next) => {
     if (validationResult?.error) {
       return res.json({ message: "validation error", validationResult });
     }
-    const { email, password, userName, cPassword } = req.body;
+    const { email, password, firstName,lastName,age, cPassword } = req.body;
     if (password != cPassword) {
       return res.json({
         message: "password and confirmation password misMatch",
       });
     }
-    // console.log({ email, password, userName });
+    // console.log({ email, password, firstName,lastName });
     const checkUser = await userModel.findOne({ email });
     if (checkUser) {
       return res.json({ message: "Email exist" });
@@ -28,7 +28,9 @@ export const signup = async (req, res, next) => {
     const user = await userModel.create({
       email,
       password: hashValue,
-      userName,
+      firstName,
+      lastName,
+      age,
     });
     // const newUser = new userModel({email , password , userName})
     // const user = await newUser.save()

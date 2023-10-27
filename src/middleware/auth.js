@@ -18,7 +18,7 @@ const auth = async(req,res,next)=>{
     if (!decoded?.id || !decoded?.isLoggedIn) {
       return res.json({message:"In-valid token payload"})
     }
-    const authUser = await userModel.findById(decoded.id).select("userName email role")
+    const authUser = await userModel.findById(decoded.id).select("firstName lastName email")
     if (!authUser) {
       return res.json({message:"this account not exist"})
     }
