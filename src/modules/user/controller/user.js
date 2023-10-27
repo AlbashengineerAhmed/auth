@@ -8,7 +8,7 @@ export const getUserModule = async (req, res, next) => {
 
 export const getUserProfile = async (req,res,next)=>{
     try {
-    const user = await userModel.findById(req.user._id).select("userName email")
+    const user = await userModel.findById(req.user._id).select("firstName lastName email")
     return res.json({message:"Done", user})
   } catch (error) {
     return res.json({message:"catch error", error})
